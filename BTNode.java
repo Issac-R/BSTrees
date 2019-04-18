@@ -72,12 +72,13 @@ public class BTNode<T> {
      */
     public int sizeBelow() {
         // Your code goes here...
-    if(this==null){
-			return 0;
-		}else if(right == null && left == null){
-			return 1;
-		}else{
-			return (right.sizeBelow() + left.sizeBelow());
+    	if(this==null){
+		return 0;
+	    }else if(right == null && left == null){
+		return 1;
+	    }else{
+		return (right.sizeBelow() + left.sizeBelow());
+	    }
     }
 
     /*
