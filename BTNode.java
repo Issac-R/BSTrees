@@ -64,6 +64,13 @@ public class BTNode<T> {
      * Your implementation must be RECURSIVE */
     public int sizeBelow() {
         // Your code goes here...
+        if(this==null){
+			return 0;
+		}else if(right == null && left == null){
+			return 1;
+		}else{
+			return (right.sizeBelow() + left.sizeBelow()); 
+		}
     }
     
     /* hasLeft returns true if the current node has a non null left child, false otherwise 
