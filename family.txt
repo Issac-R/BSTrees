@@ -1,0 +1,4 @@
+Martine-Ceberio,2,0
+FirstNameFather-LastNameFather,2,F FirstNameMother-LastNameMother,6,M
+FirstNameGF1-LastNameGF1,1,FF FirstNameGM1-LastNameGM1,1,FM FirstNameGF2-LastNameGF2,2,MF FirstNameGM2-LastNameGM2,0,MM 
+FirstNameGGF11-LastNameGGF11,4,FFF FirstNameGGM11-LastNameGGM11,3,FFM FirstNameGF2-LastNameGF2,8,MFF FirstNameGM2-LastNameGM2,9,MFM 

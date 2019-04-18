@@ -1,0 +1,4 @@
+John-Doe,2,0
+Averell-Dalton,1,F Cassidy-Jones,3,M
+Luke-Lucky,4,FF Ma-Dalton,2,FM Emil-Jones,6,MF Myrtille-White,4,MM
+Pedro-Lucky,10,FFF Mamy-Mist,0,FFM Pa-Dalton,12,FMF Emilia-Jones,5,MFM Cassis-Black,1,MMM
