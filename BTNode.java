@@ -100,10 +100,6 @@ public class BTNode<T> {
      */
     public boolean hasRight() {
         // Your code goes here...
-        if (this == null) {
-        } else if (right != null) {
-            return true;
-        }
-        return false;
+        return null;
     }
 }
