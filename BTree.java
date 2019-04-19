@@ -109,6 +109,7 @@ public class BTree<T> {
         // And now we follow directions:
         for (int j = 0; j < directions.length() - 1; j++) {
             // TODO 5. Your code goes here...
+
             if (directions.charAt(j) == 'L' || directions.charAt(j) == 'F') {
                 iter = iter.getLeft();
             } else {
