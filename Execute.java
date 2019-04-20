@@ -21,6 +21,10 @@ public class Execute {
 
         // Find out how many family levels there are in the file (i.e., the number of
         // lines)
+        int lines; // = ...; COMPLETE CODE HERE
+        // --> This gives us the size of the array      
+        int size; // = ...; COMPLETE CODE HERE
+
         int lines = 0; // = ...; COMPLETE CODE HERE
         String Line;
         FileReader fr = new FileReader(filename);
@@ -33,10 +37,17 @@ public class Execute {
         // --> This gives us the size of the array
         int size; // = ...; COMPLETE CODE HERE
         size = ((int) (Math.pow(2, lines)) - 1);
+
         // Create an array of FamilyMember elements, with the correct size:
         FamilyMember[] Family = new FamilyMember[size];
 
         // Read the file called filename to gather information into the array
+        FileReader fr = new FileReader(filename);
+        BufferedReader textReader = new BufferedReader(fr);
+
+        // YOUR CODE GOES HERE: COMPLETE HERE...
+
+        textReader.close();
         int counter = 0;
         FileReader fr2 = new FileReader(filename);
         BufferedReader textReader2 = new BufferedReader(fr2);
@@ -72,14 +83,41 @@ public class Execute {
         BTree<FamilyMember> Tree = new BTree<FamilyMember>();
 
         // YOUR CODE GOES HERE: COMPLETE HERE...
-
+        String B;
+        while ((textReader.ready()) && ((B = textReader.readLine()) != null)) {
+            String[] A = ((B).split(" "));
+            for (int i = 0; i < A.length; i++) {
+                String[] temp = processLine(A[i]);
+                FamilyMember iter = new FamilyMember(temp[0], temp[1], (Integer.parseInt(temp[2])));
+                BTNode<FamilyMember> iter2 = new BTNode<FamilyMember>(iter);
+                if (Integer.parseInt(temp[4]) == 0) {
+                    Tree.setRoot(iter2);
+                } else {
+                    BTNode<FamilyMember> iter3 = Tree.getRoot();
+                    String temp2 = temp[3];
+                    while (temp2.length() != 1) {
+                        if (temp2.charAt(0) == 'F')
+                            iter3.getLeft();
+                        if (temp2.charAt(0) == 'M')
+                            iter3.getRight();
+                        temp2 = temp2.substring(1);
+                    }
+                    if (temp2.equals('F')) {
+                        iter3.setLeft(iter2);
+                    } else {
+                        iter3.setRight(iter2);
+                    }
+                }
+            }
+        }
         textReader.close();
 
         // NOTE: Make sure that your tree has an updated size and height
+        textReader.close();
 
+        // NOTE: Make sure that your tree has an updated size and height
         // Return the resulting filled tree
         return Tree;
-
     }
 
     /*
