@@ -23,7 +23,16 @@ public class Execute {
         // lines)
         int lines; // = ...; COMPLETE CODE HERE
         // --> This gives us the size of the array
+        String Line;
+        FileReader fr = new FileReader(filename);
+        BufferedReader textReader = new BufferedReader(fr);
+        while ((textReader.ready()) && ((Line = textReader.readLine()) != null)) {
+            lines++;
+        }
+        textReader.close();
+        fr.close();
         int size; // = ...; COMPLETE CODE HERE
+        size = ((int) (Math.pow(2, lines)) - 1);
         // Create an array of FamilyMember elements, with the correct size:
         FamilyMember[] Family = new FamilyMember[size];
 
