@@ -69,19 +69,23 @@ public class BTree<T> {
      */
     public void print() {
         // Your code goes here...
-        BTNode<T> copy = root;
-        root.printNode();
-        if (copy.hasLeft()) {
-            BTNode<T> iter = root.getLeft();
-            root = iter;
-            print();
+        BTNode<T> iter = root;
+        print(iter);
+    }
+
+    public void print(BTNode<T> iter) {
+        // Base Case
+        if (iter == null) {
+            return;
         }
-        if (copy.hasRight()) {
-            BTNode<T> iter2 = root.getRight();
-            root = iter2;
-            print();
+        BTNode<T> iter2 = iter.getLeft();
+        BTNode<T> iter3 = iter.getRight();
+        if (iter.getData() == null) {
+        } else {
+            iter.printNode();
         }
-        root = copy;
+        print(iter2);
+        print(iter3);
     }
 
     /*
@@ -109,7 +113,6 @@ public class BTree<T> {
         // And now we follow directions:
         for (int j = 0; j < directions.length() - 1; j++) {
             // TODO 5. Your code goes here...
-
             if (directions.charAt(j) == 'L' || directions.charAt(j) == 'F') {
                 iter = iter.getLeft();
             } else {
@@ -137,5 +140,22 @@ public class BTree<T> {
      */
     public void inOrderTraversal() {
         // BONUS: Your code goes here...
+        BTNode<T> iter = root;
+        inOrderTraversal(iter);
+    }
+
+    public void inOrderTraversal(BTNode<T> iter) {
+        // Base Case
+        if (iter == null) {
+            return;
+        }
+        BTNode<T> iter2 = iter.getLeft();
+        BTNode<T> iter3 = iter.getRight();
+        inOrderTraversal(iter2);
+        if (iter.getData() == null) {
+        } else {
+            iter.printNode();
+        }
+        inOrderTraversal(iter3);
     }
 }

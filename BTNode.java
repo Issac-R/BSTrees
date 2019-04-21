@@ -72,15 +72,14 @@ public class BTNode<T> {
      */
     public int sizeBelow() {
         // Your code goes here...
-
-        if (this == null) {
-            return 0;
-        } else if (right == null && left == null) {
+        if (right == null && left == null) {
             return 1;
+        } else if (right != null && left == null) {
+            return (1 + right.sizeBelow());
+        } else if (right == null && left != null) {
+            return (1 + left.sizeBelow());
         } else {
-            return (right.sizeBelow() + left.sizeBelow());
-        }
-    }
+            return (1 + right.sizeBelow() + left.sizeBelow());
 
     /*
      * hasLeft returns true if the current node has a non null left child, false
@@ -88,8 +87,7 @@ public class BTNode<T> {
      */
     public boolean hasLeft() {
         // Your code goes here...
-        if (this == null) {
-        } else if (left != null) {
+        if (left != null) {
             return true;
         }
         return false;
@@ -101,8 +99,7 @@ public class BTNode<T> {
      */
     public boolean hasRight() {
         // Your code goes here...
-        if (this == null) {
-        } else if (right != null) {
+        if (right != null) {
             return true;
         }
         return false;
