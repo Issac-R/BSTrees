@@ -61,7 +61,7 @@ public class BTNode<T> {
             return -1;
         if (right == null && left == null)
             return 0;
-        return (1 + left.height());
+        return 1 + Math.max(left.height(), right.height());
     }
 
     /*
@@ -80,8 +80,6 @@ public class BTNode<T> {
             return (1 + left.sizeBelow());
         } else {
             return (1 + right.sizeBelow() + left.sizeBelow());
-        }
-    }
 
     /*
      * hasLeft returns true if the current node has a non null left child, false

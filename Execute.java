@@ -25,6 +25,9 @@ public class Execute {
         // --> This gives us the size of the array
         int size; // = ...; COMPLETE CODE HERE
         size = ((int) (Math.pow(2, lines)) - 1);
+
+        int size; // = ...; COMPLETE CODE HERE
+        size = ((int) (Math.pow(2, lines)) - 1);
         // Create an array of FamilyMember elements, with the correct size:
         FamilyMember[] Family = new FamilyMember[size];
 
@@ -43,6 +46,20 @@ public class Execute {
         }
 
         textReader.close();
+        int counter = 0;
+        FileReader fr2 = new FileReader(filename);
+        BufferedReader textReader2 = new BufferedReader(fr2);
+
+        // YOUR CODE GOES HERE: COMPLETE HERE...
+        while ((textReader2.ready()) && ((Line = textReader2.readLine()) != null)) {
+            String[] x = (Line.split(" "));
+            for (int i = 0; i < x.length; i++) {
+                String[] temp = processLine(x[i]);
+                Family[Integer.parseInt(temp[4])] = new FamilyMember(temp[0], temp[1], (Integer.parseInt(temp[2])));
+            }
+        }
+
+        textReader2.close();
 
         // Returns the filled array
         return Family;
@@ -96,6 +113,9 @@ public class Execute {
                 }
             }
         }
+        textReader.close();
+
+        // NOTE: Make sure that your tree has an updated size and height
         textReader.close();
 
         // NOTE: Make sure that your tree has an updated size and height
