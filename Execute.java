@@ -21,26 +21,26 @@ public class Execute {
 
         // Find out how many family levels there are in the file (i.e., the number of
         // lines)
-        int lines; // = ...; COMPLETE CODE HERE
+        int lines = countLines(filename); // = ...; COMPLETE CODE HERE
         // --> This gives us the size of the array
-        String Line;
-        FileReader fr = new FileReader(filename);
-        BufferedReader textReader = new BufferedReader(fr);
-        while ((textReader.ready()) && ((Line = textReader.readLine()) != null)) {
-            lines++;
-        }
-        textReader.close();
-        fr.close();
         int size; // = ...; COMPLETE CODE HERE
         size = ((int) (Math.pow(2, lines)) - 1);
         // Create an array of FamilyMember elements, with the correct size:
         FamilyMember[] Family = new FamilyMember[size];
 
         // Read the file called filename to gather information into the array
+        String Line;
         FileReader fr = new FileReader(filename);
         BufferedReader textReader = new BufferedReader(fr);
 
         // YOUR CODE GOES HERE: COMPLETE HERE...
+        while ((textReader.ready()) && ((Line = textReader.readLine()) != null)) {
+            String[] x = (Line.split(" "));
+            for (int i = 0; i < x.length; i++) {
+                String[] temp = processLine(x[i]);
+                Family[Integer.parseInt(temp[4])] = new FamilyMember(temp[0], temp[1], (Integer.parseInt(temp[2])));
+            }
+        }
 
         textReader.close();
 
@@ -66,24 +66,29 @@ public class Execute {
         // YOUR CODE GOES HERE: COMPLETE HERE...
         String B;
         while ((textReader.ready()) && ((B = textReader.readLine()) != null)) {
+            // Splits string into array of strings then creates the appropriate amount of
+            // nodes
             String[] A = ((B).split(" "));
             for (int i = 0; i < A.length; i++) {
                 String[] temp = processLine(A[i]);
                 FamilyMember iter = new FamilyMember(temp[0], temp[1], (Integer.parseInt(temp[2])));
                 BTNode<FamilyMember> iter2 = new BTNode<FamilyMember>(iter);
-                if (Integer.parseInt(temp[4]) == 0) {
+
+                // Sets root
+                if (temp[3].equals("0")) {
                     Tree.setRoot(iter2);
                 } else {
+                    // Follows the directions given from the text file to insert the node
                     BTNode<FamilyMember> iter3 = Tree.getRoot();
                     String temp2 = temp[3];
-                    while (temp2.length() != 1) {
+                    while (temp2.length() > 1) {
                         if (temp2.charAt(0) == 'F')
-                            iter3.getLeft();
+                            iter3 = iter3.getLeft();
                         if (temp2.charAt(0) == 'M')
-                            iter3.getRight();
+                            iter3 = iter3.getRight();
                         temp2 = temp2.substring(1);
                     }
-                    if (temp2.equals('F')) {
+                    if (temp2.charAt(0) == 'F') {
                         iter3.setLeft(iter2);
                     } else {
                         iter3.setRight(iter2);
@@ -95,7 +100,10 @@ public class Execute {
 
         // NOTE: Make sure that your tree has an updated size and height
         // Return the resulting filled tree
+        Tree.resetHeight();
+        Tree.resetSize();
         return Tree;
+
     }
 
     /*
@@ -109,11 +117,40 @@ public class Execute {
         BTree<FamilyMember> Tree = new BTree<FamilyMember>();
 
         // YOUR CODE GOES HERE: PLEASE COMPLETE HERE...
-
+        if ((Family.length) > 1) {
+            // Sets root
+            BTNode<FamilyMember> iter = new BTNode<FamilyMember>(Family[0]);
+            Tree.setRoot(iter);
+            BTNode<FamilyMember> temp = Tree.getRoot();
+            sortArray(temp, Family, 0);
+        }
         // NOTE: Make sure that your tree has an updated size and height
-
         // Return the resulting filled linked-list-based binary tree
+        Tree.resetHeight();
+        Tree.resetSize();
         return Tree;
+    }
+
+    public static void sortArray(BTNode<FamilyMember> iter, FamilyMember[] Family, int x) {
+        // Base Case
+        if (((x * 2) + 2) > Family.length) {
+            return;
+        }
+
+        // Only makes a new left node if Family[x] is not null
+        if (Family[((x * 2) + 1)] != null) {
+            BTNode<FamilyMember> temp = new BTNode<FamilyMember>(Family[((x * 2) + 1)]);
+            iter.setLeft(temp);
+            BTNode<FamilyMember> temp3 = iter.getLeft();
+            sortArray(temp3, Family, ((x * 2) + 1));
+        }
+        // Only makes a new right node if Family[x] is not null
+        if (Family[((x * 2) + 2)] != null) {
+            BTNode<FamilyMember> temp2 = new BTNode<FamilyMember>(Family[((x * 2) + 2)]);
+            iter.setRight(temp2);
+            BTNode<FamilyMember> temp4 = iter.getRight();
+            sortArray(temp4, Family, ((x * 2) + 2));
+        }
     }
 
     /****************************************************************************************
@@ -234,5 +271,4 @@ public class Execute {
         textReader.close();
         return counter;
     }
-
 }
